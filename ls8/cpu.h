@@ -24,9 +24,9 @@ enum alu_op {
 // These use binary literals. If these aren't available with your compiler, hex
 // literals should be used.
 
-#define LDI  0b10000010
-#define PRN  0b01000111
-#define HLT  0b00000001
+#define LDI 0b10000010
+#define PRN 0b01000111
+#define HLT 0b00000001
 #define MUL 0b10100010
 #define POP 0b01000110
 #define PUSH 0b01000101

@@ -4,8 +4,7 @@
 #include <stdlib.h>
 
 #define DATA_LEN 6
-
-unsigned int sp = 7;
+#define sp 7
 
 unsigned char cpu_ram_read(struct cpu *cpu, char loc)
 {
