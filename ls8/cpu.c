@@ -4,7 +4,18 @@
 #include <stdlib.h>
 
 #define DATA_LEN 6
-#define sp 7
+
+unsigned int sp = 7;
+
+unsigned char cpu_ram_read(struct cpu *cpu, char loc)
+{
+  return cpu->ram[loc];
+}
+
+void cpu_ram_write(struct cpu *cpu, char loc, unsigned char val)
+{
+  cpu->ram[loc] = val;
+}
 
 /**
  * Load the binary bytes from a .ls8 source file into a RAM array
@@ -123,6 +134,15 @@ void cpu_run(struct cpu *cpu)
       break;
     }
 
+    if ((0b11000000 & ir) >> 6 == 1 && ir != CALL && ir != RET)
+    {
+      cpu->pc += 2;
+    }
+    else if ((0b11000000 & ir) >> 6 == 2)
+    {
+      cpu->pc += 3;
+    }
+
   }
 
 }
@@ -134,17 +154,8 @@ void cpu_init(struct cpu *cpu)
 {
   // TODO: Initialize the pc and other special registers
   cpu->pc = 0;
+  cpu->registers[sp] = 0xF4;
   memset(cpu->ram, 0, sizeof(cpu->ram));
   memset(cpu->registers, 0, sizeof(cpu->registers));
-  cpu->registers[7] = 0xf4;
 }
 
-unsigned char cpu_ram_read(struct cpu *cpu, char loc)
-{
-  return cpu->ram[loc];
-}
-
-void cpu_ram_write(struct cpu *cpu, char loc, unsigned char val)
-{
-  cpu->ram[loc] = val;
-}
