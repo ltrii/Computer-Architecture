@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 #define DATA_LEN 6
-#define Sp 7
+#define sp 7
 
 /**
  * Load the binary bytes from a .ls8 source file into a RAM array
@@ -98,21 +98,21 @@ void cpu_run(struct cpu *cpu)
       alu(cpu, ALU_ADD, opA, opB);
       break;
     case POP:
-      cpu->registers[opA] = cpu->ram[(cpu->registers[Sp])];
-      cpu->registers[Sp]++;
+      cpu->registers[opA] = cpu->ram[(cpu->registers[sp])];
+      cpu->registers[sp]++;
       break;
     case PUSH:
-      cpu->registers[Sp]--;
-      cpu_ram_write(cpu, cpu->registers[Sp], cpu->registers[opA]);
+      cpu->registers[sp]--;
+      cpu_ram_write(cpu, cpu->registers[sp], cpu->registers[opA]);
       break;
     case CALL:
-      cpu->registers[Sp]--;
-      cpu_ram_write(cpu, cpu->registers[Sp], cpu->pc + 2);
+      cpu->registers[sp]--;
+      cpu_ram_write(cpu, cpu->registers[sp], cpu->pc + 2);
       cpu->pc = cpu->registers[opA];
       break;
     case RET:
-      cpu->pc = cpu->ram[cpu->registers[Sp]];
-      cpu->registers[Sp]++;
+      cpu->pc = cpu->ram[cpu->registers[sp]];
+      cpu->registers[sp]++;
       break;
     case HLT:
       running = 0;
