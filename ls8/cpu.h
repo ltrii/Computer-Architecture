@@ -2,21 +2,24 @@
 #define _CPU_H_
 
 // Holds all information about the CPU
-struct cpu {
-  // TODO
-  // PC
-  // registers (array)
-  // ram (array)
+struct cpu
+{
   unsigned char pc;
+
+  unsigned char fl;
+
   unsigned char registers[8];
   unsigned char ram[256];
 };
 
 // ALU operations
-enum alu_op {
-	ALU_MUL,
-  ALU_ADD
-	// Add more here
+enum alu_op
+{
+  ALU_MUL,
+  ALU_ADD,
+  ALU_CMP
+
+  // Add more here
 };
 
 // Instructions
@@ -33,6 +36,7 @@ enum alu_op {
 #define RET 0b000010001
 #define CALL 0b01010000
 #define ADD 0b10100000
+#define CMP 0b10100111
 // TODO: more instructions here. These can be used in cpu_run().
 
 // Function declarations
